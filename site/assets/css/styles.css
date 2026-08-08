@@ -1207,9 +1207,15 @@ p { margin: 0; }
   to   { filter: none; transform: scale(1); }
 }
 
+/* Подпись меняется вместе со слайдом, и длина текста у направлений разная.
+   Во флекс-ряду она то помещалась рядом с переключателями, то перескакивала
+   на вторую строку — высота ряда прыгала с 30 до 78px, а вместе с ней
+   дёргалась вся страница. Сетка ставит подпись на свою строку всегда,
+   поэтому высота не зависит от длины текста. */
 .hero__bar {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; flex-wrap: wrap;
+  display: grid;
+  justify-items: start;
+  gap: .7rem;
   margin-top: 1rem;
 }
 .hero__dots { display: flex; gap: .4rem; }
@@ -1231,6 +1237,7 @@ p { margin: 0; }
 .hero__caption {
   position: static;
   color: var(--label);
+  min-height: 1.5em;   /* строка зарезервирована, даже если текст короткий */
 }
 
 @media (max-width: 860px) {
