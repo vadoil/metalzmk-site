@@ -22,7 +22,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/prata-400-cyrillic.woff2">
 <link rel="stylesheet" href="assets/css/fonts.css">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="assets/css/styles.css?v=30368f2f">
+<link rel="stylesheet" href="assets/css/styles.css?v=10b65f42">
 
 <script type="application/ld+json">
 {
@@ -891,13 +891,18 @@
         <label class="field"><span>Что хотите получить от обучения</span>
           <textarea name="message" placeholder="Хочу снимать свою собаку и помёты нашего питомника. Пробовала сама — получается серо."></textarea>
         </label>
-        <button class="btn btn--onolive btn--wide" type="submit">Отправить заявку <span class="btn__arr">→</span></button>
-        <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
         <label class="consent">
           <input type="checkbox" name="consent" required>
           <span>Я ознакомлен(а) с <a href="/politika.html" target="_blank" rel="noopener">политикой обработки персональных данных</a> и даю согласие на обработку моих данных.</span>
         </label>
-        <p class="form__note">Рассылок не будет — только ответ на вашу заявку.</p>
+        <label class="consent consent--soft">
+          <input type="checkbox" name="mailing">
+          <span>Хочу получать сообщения о свободных датах и наборах на курсы. Необязательно, отписаться можно в любой момент.</span>
+        </label>
+
+        <button class="btn btn--onolive btn--wide" type="submit">Отправить заявку <span class="btn__arr">→</span></button>
+        <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+        <p class="form__note">Отправка заявки ни к чему не обязывает: договор заключается на условиях <a href="/oferta.html" target="_blank" rel="noopener">оферты</a> и только после оплаты.</p>
       </form>
     </div>
   </section>
@@ -928,8 +933,8 @@
       </nav>
     </div>
     <div class="site-foot__bottom">
-      <span>© <span id="year">2026</span> Ксения Колесникова · metalzmk.ru</span>
-      <span><a href="/politika.html">Политика персональных данных</a> · Все фотографии авторские</span>
+      <span>© <span id="year">2026</span> ИП Колесникова Ксения · metalzmk.ru</span>
+      <span><a href="/politika.html">Политика</a> · <a href="/oferta.html">Оферта</a> · Фотографии авторские</span>
     </div>
   </div>
 </footer>
@@ -956,6 +961,6 @@
   </div>
 </div>
 
-<script src="assets/js/main.js?v=b6a51c27" defer></script>
+<script src="assets/js/main.js?v=30f866e3" defer></script>
 </body>
 </html>

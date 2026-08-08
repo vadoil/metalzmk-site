@@ -1417,3 +1417,8 @@ p { margin: 0; }
   .js .fab__btn[data-ping="true"] { animation: none; }
   .fab__btn { transition: none; }
 }
+
+/* Согласие на рассылку — добровольное, поэтому тише обязательного */
+.consent--soft { color: rgba(185, 191, 164, .8); font-size: .75rem; }
+.consent { margin-block: .15rem; }
+.consent + .consent { margin-top: -.4rem; }

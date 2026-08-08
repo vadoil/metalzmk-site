@@ -407,7 +407,8 @@
         'Связь: ' + contact,
         'Собака: ' + (data.get('dog') || '—'),
         'Формат: ' + (data.get('topic') || '—'),
-        'Комментарий: ' + (data.get('message') || '—')
+        'Комментарий: ' + (data.get('message') || '—'),
+        'Согласие на рассылку: ' + (data.get('mailing') ? 'да' : 'нет')
       ].join('\n');
 
       status.dataset.kind = '';
