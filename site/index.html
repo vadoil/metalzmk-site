@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ксения Колесникова — фотограф собак в Самаре. Съёмка и обучение</title>
-<meta name="description" content="Съёмка собак в Самаре: прогулки, портреты, щенки для заводчиков, выставочный ринг. И шесть обучающих программ — от камеры с нуля до профессии фотографа-анималиста.">
+<meta name="description" content="Фотограф собак в Самаре и с выездом: прогулки, портреты, щенки для заводчиков, выставочный ринг. И шесть курсов — от первой кнопки до платных съёмок.">
 <link rel="canonical" href="https://metalzmk.ru/">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Ксения Колесникова">
 <meta property="og:title" content="Ксения Колесникова — фотограф собак в Самаре">
-<meta property="og:description" content="Прогулки, портреты, щенки для заводчиков и выставочный ринг. Плюс шесть обучающих программ по фотографии и съёмке собак.">
+<meta property="og:description" content="Собаки, щенки и выставочный ринг глазами фотографа из Самары. И шесть программ обучения — от первой кнопки на камере до первых оплаченных съёмок.">
 <meta property="og:url" content="https://metalzmk.ru/">
 <meta property="og:image" content="https://metalzmk.ru/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -22,11 +22,11 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Prata&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/golos-text-400-cyrillic.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/prata-400-cyrillic.woff2">
+<link rel="stylesheet" href="assets/css/fonts.css">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="assets/css/styles.css?v=5c23a82e">
+<link rel="stylesheet" href="assets/css/styles.css?v=30368f2f">
 <link rel="preload" as="image" href="assets/photos/hero-birch-jump@720.jpg" fetchpriority="high">
 
 <script type="application/ld+json">
@@ -763,7 +763,11 @@
         </label>
         <button class="btn btn--onolive btn--wide" type="submit">Отправить заявку <span class="btn__arr">→</span></button>
         <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
-        <p class="form__note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных. Никакой рассылки.</p>
+        <label class="consent">
+          <input type="checkbox" name="consent" required>
+          <span>Я ознакомлен(а) с <a href="/politika.html" target="_blank" rel="noopener">политикой обработки персональных данных</a> и даю согласие на обработку моих данных.</span>
+        </label>
+        <p class="form__note">Рассылок не будет — только ответ на вашу заявку.</p>
       </form>
     </div>
   </section>
@@ -795,7 +799,7 @@
     </div>
     <div class="site-foot__bottom">
       <span>© <span id="year">2026</span> Ксения Колесникова · metalzmk.ru</span>
-      <span>Все фотографии на сайте — авторские</span>
+      <span><a href="/politika.html">Политика персональных данных</a> · Все фотографии авторские</span>
     </div>
   </div>
 </footer>
@@ -810,6 +814,28 @@
   </div>
 </div>
 
-<script src="assets/js/main.js?v=c535f94a" defer></script>
+<!-- Плавающая кнопка связи -->
+<div class="fab" id="fab">
+  <div class="fab__menu" id="fab-menu" hidden>
+    <a class="fab__item" href="tel:+79272633638"><span class="fab__label">Позвонить</span><span class="fab__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 3h3l1.5 3.8-1.9 1.4a12 12 0 0 0 5.6 5.6l1.4-1.9L20 13.4v3A1.6 1.6 0 0 1 18.3 18 14.6 14.6 0 0 1 5 4.7 1.6 1.6 0 0 1 6.6 3z"/></svg></span></a>
+    <a class="fab__item" href="https://t.me/KolesnikovaKseniia" target="_blank" rel="noopener"><span class="fab__label">Telegram</span><span class="fab__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1L18 6.6c.4-.4-.1-.6-.6-.2L7.2 13l-4.9-1.5c-1.1-.3-1.1-1 .2-1.5l19.2-7.4c.9-.3 1.6.2 1.3 1.7z"/></svg></span></a>
+    <a class="fab__item" href="https://wa.me/79272633638" target="_blank" rel="noopener"><span class="fab__label">WhatsApp</span><span class="fab__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.8-.6-3-1.3-5-4.4-5.2-4.6-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2 0 .4-.1.5l-.3.4c-.1.1-.3.3-.1.6.1.3.7 1.2 1.5 1.9 1 .9 1.8 1.2 2.1 1.3.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg></span></a>
+    <a class="fab__item" href="https://vk.com/kolesnikovakseniafoto" target="_blank" rel="noopener"><span class="fab__label">ВКонтакте</span><span class="fab__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.8 16.6c-5.3 0-8.6-3.7-8.7-9.8h2.7c.1 4.5 2.1 6.4 3.6 6.8V6.8h2.5v3.9c1.5-.2 3-1.9 3.6-3.9h2.5c-.4 2.4-2 4.1-3.2 4.8 1.2.6 3 2.1 3.7 4.9h-2.7c-.5-1.7-1.9-3.1-3.9-3.3v3.3h-.1z"/></svg></span></a>
+  </div>
+  <button class="fab__btn" id="fab-btn" aria-expanded="false" aria-controls="fab-menu" aria-label="Связаться">
+    <svg class="fab__open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.3-.6L3 21l1.7-5.1A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/></svg>
+    <svg class="fab__close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+</div>
+
+<!-- Уведомление о cookie -->
+<div class="cookie" id="cookie" hidden>
+  <p class="cookie__text">Сайт сохраняет в браузере только технические файлы cookie — они нужны, чтобы это уведомление не появлялось снова. Счётчиков и рекламы здесь нет. Подробности — в <a href="/politika.html">политике обработки персональных данных</a>.</p>
+  <div class="cookie__act">
+    <button class="btn btn--onolive" id="cookie-ok" type="button">Понятно</button>
+  </div>
+</div>
+
+<script src="assets/js/main.js?v=b6a51c27" defer></script>
 </body>
 </html>

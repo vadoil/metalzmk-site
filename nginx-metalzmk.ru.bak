@@ -1,0 +1,101 @@
+# Ксения Колесникова — фотограф собак, Самара. metalzmk.ru
+# Статический сайт, бэкенда нет. Соседние домены живут в своих конфигах —
+# здесь только metalzmk.ru, ничего чужого не трогаем.
+#
+# Заголовки кеша заданы через expires, а не add_header: add_header внутри
+# location сбрасывает унаследованные заголовки безопасности с уровня server.
+
+server {
+    server_name metalzmk.ru www.metalzmk.ru;
+
+    root /var/www/metalzmk.ru;
+    index index.html;
+    charset utf-8;
+
+    access_log /var/log/nginx/metalzmk.ru.access.log;
+    error_log  /var/log/nginx/metalzmk.ru.error.log;
+
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 512;
+    gzip_types text/plain text/css application/javascript application/json
+               image/svg+xml application/xml application/rss+xml;
+
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # Фотографии отдаём в WebP, если браузер его принимает. Рядом с каждым
+    # .jpg лежит .webp — подменяем прозрачно, разметку менять не нужно.
+    # Vary: Accept обязателен, иначе прокси отдаст webp тому, кто его не ждёт.
+    location ~* ^(?<img_base>/assets/photos/.+)\.(?:jpg|jpeg)$ {
+        add_header Vary "Accept";
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+        add_header X-Frame-Options "SAMEORIGIN" always;
+        expires 7d;
+        access_log off;
+        try_files $img_base$webp_ext $uri =404;
+    }
+
+    # Фотографии Ксения будет менять на оригиналы под теми же именами,
+    # поэтому неделя, а не год: иначе у посетителей надолго залипнет старое.
+    location ~* \.(?:jpg|jpeg|png|webp|gif|svg|ico|woff2?)$ {
+        expires 7d;
+        access_log off;
+    }
+
+    location ~* \.(?:css|js)$ {
+        expires 7d;
+    }
+
+    # Разметку не кешируем — правки текста и цен должны быть видны сразу.
+    location ~* \.html$ {
+        expires -1;
+    }
+
+    location = /robots.txt  { access_log off; log_not_found off; }
+    location = /sitemap.xml { access_log off; }
+    location = /favicon.ico { access_log off; log_not_found off; }
+
+    # Служебное наружу не отдаём.
+    location ~ /\. { deny all; }
+
+    error_page 404 /404.html;
+    location = /404.html { internal; }
+
+    listen [::]:443 ssl; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/metalzmk.ru/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/metalzmk.ru/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+}
+
+
+server {
+    if ($host = www.metalzmk.ru) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = metalzmk.ru) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    listen [::]:80;
+    server_name metalzmk.ru www.metalzmk.ru;
+    return 404; # managed by Certbot
+
+
+
+
+}

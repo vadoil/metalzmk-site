@@ -1244,3 +1244,176 @@ p { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   .js [data-in="true"] .hero__ico svg { animation: none; }
 }
+
+/* ==========================================================================
+   ДОКУМЕНТЫ, СОГЛАСИЕ, COOKIE, ПЛАВАЮЩАЯ КНОПКА
+   ========================================================================== */
+
+/* --- Страница документа ---------------------------------------------------- */
+.doc__body { max-width: 74ch; }
+.doc__body h2 {
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  margin: 2.6rem 0 .9rem;
+  padding-top: 1.6rem;
+  border-top: var(--rule);
+}
+.doc__body h2:first-of-type { margin-top: 1rem; }
+.doc__body p { margin-bottom: 1rem; color: var(--ink-soft); }
+.doc__body ul.ticks { margin-bottom: 1.25rem; }
+.doc__body a { color: var(--ochre); text-underline-offset: .2em; }
+.doc__warn {
+  border: 1.5px solid var(--rosette);
+  border-radius: 3px;
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 2rem;
+  background: color-mix(in srgb, var(--rosette) 6%, transparent);
+}
+.doc__warn p { margin: 0; color: var(--ink); font-size: .9375rem; }
+
+/* --- Согласие в форме ------------------------------------------------------ */
+.consent {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .7rem;
+  align-items: start;
+  cursor: pointer;
+  font-size: .8125rem;
+  line-height: 1.5;
+  color: var(--on-olive-soft);
+}
+.consent input {
+  appearance: none;
+  width: 1.15rem; height: 1.15rem;
+  margin: .1rem 0 0;
+  border: 1.5px solid rgba(239, 234, 220, .55);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  display: grid; place-content: center;
+  transition: background-color .2s, border-color .2s;
+  flex-shrink: 0;
+}
+.consent input::before {
+  content: "";
+  width: .55rem; height: .3rem;
+  border-left: 2px solid var(--olive);
+  border-bottom: 2px solid var(--olive);
+  transform: rotate(-45deg) scale(0);
+  transition: transform .2s cubic-bezier(.3, .1, .3, 1);
+}
+.consent input:checked { background: var(--on-olive); border-color: var(--on-olive); }
+.consent input:checked::before { transform: rotate(-45deg) scale(1); }
+.consent a { color: var(--on-olive); }
+.consent[data-invalid="true"] input { border-color: #E0A0A0; }
+
+/* --- Уведомление о cookie -------------------------------------------------- */
+.cookie {
+  position: fixed;
+  left: 1rem; right: 1rem; bottom: 1rem;
+  z-index: 80;
+  max-width: 46rem;
+  margin-inline: auto;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem;
+  padding: 1.1rem 1.35rem;
+  background: var(--olive-deep);
+  color: var(--on-olive);
+  border-radius: 4px;
+  box-shadow: 0 16px 40px rgba(20, 24, 14, .35);
+  transform: translateY(140%);
+  transition: transform .5s cubic-bezier(.2, .7, .3, 1);
+}
+.cookie[data-on="true"] { transform: none; }
+.cookie[hidden] { display: none; }
+.cookie__text { flex: 1 1 20rem; font-size: .875rem; color: var(--on-olive-soft); margin: 0; }
+.cookie__text a { color: var(--on-olive); }
+.cookie__act { display: flex; gap: .6rem; flex-shrink: 0; }
+.cookie .btn { padding: .65rem 1.25rem; font-size: .75rem; }
+@media (prefers-reduced-motion: reduce) { .cookie { transition: none; } }
+
+/* --- Плавающая кнопка связи ------------------------------------------------ */
+.fab {
+  position: fixed;
+  right: clamp(1rem, 2.5vw, 1.75rem);
+  bottom: clamp(1rem, 2.5vw, 1.75rem);
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .65rem;
+}
+.fab__menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .55rem;
+}
+.fab__menu[hidden] { display: none; }
+
+.fab__item {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .5rem .5rem .5rem .95rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.5px solid rgba(38, 38, 31, .16);
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(38, 38, 31, .14);
+  opacity: 0;
+  transform: translateY(8px) scale(.96);
+  transition: opacity .25s ease, transform .25s cubic-bezier(.2, .7, .3, 1),
+              border-color .2s ease;
+}
+.fab[data-open="true"] .fab__item { opacity: 1; transform: none; }
+.fab[data-open="true"] .fab__item:nth-child(1) { transition-delay: .04s; }
+.fab[data-open="true"] .fab__item:nth-child(2) { transition-delay: .08s; }
+.fab[data-open="true"] .fab__item:nth-child(3) { transition-delay: .12s; }
+.fab[data-open="true"] .fab__item:nth-child(4) { transition-delay: .16s; }
+.fab__item:hover { border-color: var(--ink); }
+.fab__label {
+  font-family: var(--ff-mono); font-size: .75rem; letter-spacing: .08em;
+  text-transform: uppercase; white-space: nowrap;
+}
+.fab__ico {
+  width: 2.1rem; height: 2.1rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--olive);
+  color: var(--on-olive);
+  flex-shrink: 0;
+}
+.fab__ico svg { width: 1.05rem; height: 1.05rem; display: block; }
+
+.fab__btn {
+  width: 3.6rem; height: 3.6rem;
+  border-radius: 50%;
+  border: 0;
+  background: var(--ochre);
+  color: #fff;
+  cursor: pointer;
+  display: grid; place-items: center;
+  box-shadow: 0 10px 26px rgba(184, 112, 58, .42);
+  transition: transform .3s cubic-bezier(.2, .7, .3, 1), background-color .25s ease;
+}
+.fab__btn:hover { transform: translateY(-3px) scale(1.04); }
+.fab__btn svg { width: 1.5rem; height: 1.5rem; display: block; transition: transform .3s ease, opacity .2s ease; }
+.fab__btn .fab__close { position: absolute; opacity: 0; transform: rotate(-45deg); }
+.fab[data-open="true"] .fab__btn { background: var(--ink); }
+.fab[data-open="true"] .fab__btn .fab__open { opacity: 0; transform: rotate(45deg); }
+.fab[data-open="true"] .fab__btn .fab__close { opacity: 1; transform: rotate(0); }
+
+/* мягкая пульсация, чтобы кнопку заметили — один раз, не назойливо */
+@keyframes fab-ping {
+  0%, 100% { box-shadow: 0 10px 26px rgba(184, 112, 58, .42), 0 0 0 0 rgba(184, 112, 58, .5); }
+  50%      { box-shadow: 0 10px 26px rgba(184, 112, 58, .42), 0 0 0 14px rgba(184, 112, 58, 0); }
+}
+.js .fab__btn[data-ping="true"] { animation: fab-ping 2.4s ease-out 3; }
+
+@media (max-width: 620px) {
+  .fab__btn { width: 3.2rem; height: 3.2rem; }
+  .fab__label { font-size: .6875rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fab__item { transition: none; }
+  .js .fab__btn[data-ping="true"] { animation: none; }
+  .fab__btn { transition: none; }
+}

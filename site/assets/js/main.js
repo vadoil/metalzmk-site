@@ -152,6 +152,55 @@
     play();
   }
 
+  /* --- Плавающая кнопка связи -------------------------------------------- */
+  var fab = $('#fab'), fabBtn = $('#fab-btn'), fabMenu = $('#fab-menu');
+  if (fab && fabBtn && fabMenu) {
+    function fabSet(open) {
+      fab.setAttribute('data-open', String(open));
+      fabBtn.setAttribute('aria-expanded', String(open));
+      if (open) { fabMenu.hidden = false; }
+      else { setTimeout(function () { if (fab.getAttribute('data-open') !== 'true') fabMenu.hidden = true; }, 260); }
+      fabBtn.removeAttribute('data-ping');
+    }
+    fabBtn.addEventListener('click', function () {
+      fabSet(fab.getAttribute('data-open') !== 'true');
+    });
+    document.addEventListener('click', function (e) {
+      if (!fab.contains(e.target) && fab.getAttribute('data-open') === 'true') fabSet(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && fab.getAttribute('data-open') === 'true') { fabSet(false); fabBtn.focus(); }
+    });
+    // один раз за визит мягко подсказываем, что кнопка живая
+    try {
+      if (!sessionStorage.getItem('fab-seen')) {
+        setTimeout(function () { fabBtn.setAttribute('data-ping', 'true'); }, 6000);
+        sessionStorage.setItem('fab-seen', '1');
+      }
+    } catch (e) { /* приватный режим — просто без подсказки */ }
+  }
+
+  /* --- Уведомление о cookie -----------------------------------------------
+   * Выбор храним в localStorage, а не в cookie: так на сайте не появляется
+   * ни одного собственного cookie-файла, и заявление в политике остаётся
+   * правдой.
+   * ------------------------------------------------------------------- */
+  var cookieBox = $('#cookie');
+  if (cookieBox) {
+    var KEY = 'cookie-notice-v1';
+    var seen = false;
+    try { seen = localStorage.getItem(KEY) === 'ok'; } catch (e) { seen = true; }
+    if (!seen) {
+      cookieBox.hidden = false;
+      setTimeout(function () { cookieBox.setAttribute('data-on', 'true'); }, 1200);
+      $('#cookie-ok').addEventListener('click', function () {
+        cookieBox.removeAttribute('data-on');
+        try { localStorage.setItem(KEY, 'ok'); } catch (e) {}
+        setTimeout(function () { cookieBox.hidden = true; }, 500);
+      });
+    }
+  }
+
   /* --- Шапка реагирует на скролл ---------------------------------------- */
   var head = $('.site-head');
   if (head) {
@@ -341,6 +390,16 @@
         status.textContent = 'Заполните имя и способ связи — без них я не смогу ответить.';
         return;
       }
+
+      var consent = form.querySelector('[name="consent"]');
+      if (consent && !consent.checked) {
+        consent.closest('.consent').dataset.invalid = 'true';
+        consent.focus();
+        status.dataset.kind = 'err';
+        status.textContent = 'Отметьте согласие на обработку персональных данных — без него я не вправе принять заявку.';
+        return;
+      }
+      if (consent) consent.closest('.consent').removeAttribute('data-invalid');
 
       var text = [
         'Заявка с сайта metalzmk.ru',
